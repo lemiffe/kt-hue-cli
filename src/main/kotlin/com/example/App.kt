@@ -11,7 +11,6 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import picocli.CommandLine
 import java.io.File
-import java.net.ConnectException
 import java.util.*
 import kotlin.system.exitProcess
 import picocli.CommandLine.Command
@@ -223,7 +222,7 @@ open class App : Runnable {
         try {
             factory = HueFactory(config.ip, config.apiKey, config.appName)
             factory.initializeHue()
-        } catch (exception: ConnectException) {
+        } catch (exception: Throwable) {
             println("Couldn't connect to Hue bridge (wrong IP or network)")
             exitProcess(2)
         }
